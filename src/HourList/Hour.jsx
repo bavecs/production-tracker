@@ -71,12 +71,8 @@ export default function Hour({ data, handleHourSelection }) {
 
         // });
 
-    }, [data, getHour, items, normal])
+    }, [data, getHour, items])
 
-    const handleSetNormal = newNormal => {
-        setNormal(newNormal);
-        console.log(normal);
-    } 
 
     return (
         <div className="h-0 overflow-visible mb-[90px]">
@@ -134,7 +130,7 @@ export default function Hour({ data, handleHourSelection }) {
             
                     </div>
                 </div>
-                <EditHour items={items} setNormal={newNormal => handleSetNormal(newNormal)}/>
+                <EditHour items={items} />
             </div>
         </div>
     )
