@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply dark:bg-gray-800
+}
+
+
+.activeHour {
+    @apply border-green-600 border-2 box-content bg-white;
+    box-shadow: 0 5px -3px rgb(42, 198, 28);
+}
+
+.selectedHour {
+    @apply border-blue-600 scale-105;
+    box-shadow: 0 0 0px 1px rgb(37 99 235);
+}
+
+.selectedHour .normal-values {
+    @apply bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 !text-white cursor-pointer
+}
+
+.selectedHour .products {
+    width:100%;
+}
+
+.selectedHour b {
+    @apply  !text-white
+}
+
+.selectedHour {
+    @apply bg-blue-600
+}
+
+.hourWrapper .editPanel {
+    max-height: 0px;
+    transition-property: max-height;
+    transition-timing-function: ease-in-out;
+    transition-property: max-height;
+    @apply bg-blue-600
+
+}
+
+.hourWrapper.onEditHour .editPanel{
+    max-height: 400px;
+}
+
+
+.positive {
+    @apply text-green-600
+}
+
+.negative {
+    @apply text-red-600
+}
+
+.operator .icon {
+    border: 2px solid #ffffff00;
+    box-shadow: inset 0px 0px 2px #00000066;    
+}
