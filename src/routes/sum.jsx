@@ -15,6 +15,7 @@ export default function Sum() {
         updateProductList()
     }, [hoursData])
 
+
     const updateProductList = () => {
         setProducts([]);
         setItems([])

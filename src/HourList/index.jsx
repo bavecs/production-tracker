@@ -22,8 +22,7 @@ let getCurrentHour = new Date().getHours();
 
 
 export default function HourList() {
-    const [workingHours, setWorkingHours] = useState(workingHoursJson[1])
-
+    const [workingHours, setWorkingHours] = useState(workingHoursJson[2])
     const [selectedHour, setSelectedHour] = useState(null)
 
 
@@ -70,7 +69,7 @@ export default function HourList() {
 
     return (
         <div className="
-            mt-3 mb-[200px]
+            mt-3 mb-[300px]
         ">
             <div className="mb-3">
 

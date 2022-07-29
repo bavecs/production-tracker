@@ -8,6 +8,7 @@ import { BsFillCaretDownFill } from "react-icons/bs";
 
 let getHour = new Date().getHours();
 
+
 export default function Hour({ data, handleHourSelection }) {
 
 
@@ -24,19 +25,29 @@ export default function Hour({ data, handleHourSelection }) {
     const [operators, setOperators] = useState(1);
 
 
-    const toggleEditButton = useRef()
+    const editTogler = useRef();
+    const hourWrapperRef = useRef();
+    
 
-    const [onEdit, toggleEdit] = useReducer((onEdit)=> {
-        return !onEdit
+
+    const [onEdit, toggleEdit] = useReducer((onEdit, action) => {
+
+        return action ? action === "OPEN" : !onEdit
+
     }, false);
 
+
+
+
+    
+
     const toggleSelection = (e) => {
-        // console.log(toggleEditButton.current)
+        // console.log(editTogler.current)
         // .replaceWith(box.cloneNode(true));
 
        if (e.target.parentNode.id === "toggleEditParent" ||
-       e.target === toggleEditButton.current ||
-       toggleEditButton.current.contains(e.target)
+       e.target === editTogler.current ||
+       editTogler.current.contains(e.target)
        )  return 
 
        if (onEdit) return 
@@ -44,10 +55,6 @@ export default function Hour({ data, handleHourSelection }) {
         handleHourSelection(hourData.hour)
     }
 
-    const mapGet = (obj, hour) => {
-        const map = new Map().set(obj.key, obj.value);
-        return map.get(hour);
-    }
 
     useEffect(() => {
         setData(data);
@@ -59,6 +66,9 @@ export default function Hour({ data, handleHourSelection }) {
         
 
         setAchived(items.reduce((prev, item) => prev + item.quantity, 0));
+
+
+        if(!data.selected && onEdit) toggleEdit("CLOSE")
 
         // setNormal(() => {
         //     //  return 0
@@ -80,7 +90,9 @@ export default function Hour({ data, handleHourSelection }) {
 
     return (
         <div className="h-0 overflow-visible mb-[90px]">
-            <div className={`hourWrapper bg-white   rounded-[0.8rem] border border-gray-100 overflow-hidden
+            <div
+                ref={hourWrapperRef}
+                className={`hourWrapper bg-white   rounded-[0.8rem] border border-gray-100 overflow-hidden
                 transition-transform ease-in-out         dark:bg-gray-900   dark:border-gray-700    
                 ${isActive ? 'activeHour	' : ''}
                 ${hourData.selected ? 'selectedHour' : ''}
@@ -106,7 +118,7 @@ export default function Hour({ data, handleHourSelection }) {
                             <div className="info flex" id="toggleEditParent">
                                 <span className="flex text-xs m-[5px] mr-4 text-slate-600"><FaUserAlt className="mr-1 mt-[3px] text-[10px]" />{operators}</span>
                                 <span
-                                    ref={toggleEditButton}
+                                    ref={editTogler}
                                     onClick={() => hourData.selected ? toggleEdit() : false}
                                     className="normal-values rounded-lg rounded-t-none px-2 py-0 "
                                     id="hourEditorToggle">

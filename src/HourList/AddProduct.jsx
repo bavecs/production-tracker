@@ -43,10 +43,9 @@ function AddProduct({ products, onSubmit }) {
             <form onSubmit={handleSubmit}
                 className="
                     addProduct
-                    border
-                    border-gray-100
                     rounded-xl p-4
-                    bg-blue-100
+                    bg-blue-800
+                    shadow-lg
 
                     ">
 
