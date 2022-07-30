@@ -22,10 +22,10 @@ let getCurrentHour = new Date().getHours();
 
 
 export default function HourList() {
-    const [workingHours, setWorkingHours] = useState(workingHoursJson[2])
+    const [workingHours, setWorkingHours] = useState(workingHoursJson[0])
     const [selectedHour, setSelectedHour] = useState(null)
 
-
+    
 
     const [hours, setHours] = useHourLocalStorage('hours', 
         workingHours.workingHours.map((hour) =>
