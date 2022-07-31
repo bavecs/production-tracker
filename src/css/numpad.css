@@ -99,3 +99,15 @@
     width: 100%;
     justify-content: center;
 }
+
+.numepedWrapper.numepadOpen {
+    @apply !translate-y-0
+}
+
+.numepedWrapper.numepadOpen .addProduct {
+    @apply bg-blue-800 dark:bg-blue-900 shadow-xl drop-shadow-md opacity-100 
+}
+
+.numepedWrapper.numepadOpen #numpad {
+
+}

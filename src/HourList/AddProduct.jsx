@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import numpad from "../css/numpad.css"
 
-import { BsArrowReturnLeft, BsBackspace } from 'react-icons/bs'
+import { BsArrowReturnLeft, BsBackspace, BsChevronDown, BsPlusLg } from 'react-icons/bs'
 
 
 function AddProduct({ products, onSubmit }) {
@@ -65,54 +65,70 @@ function AddProduct({ products, onSubmit }) {
 
     }
 
+    const toggleNumepad = () => {
+        toggleNumpadIsOpen(!numpadIsOpen);
+    }
+
+
 
     return (
 
-        <div className="flex justify-center fixed right-0 left-0 bottom-0 pb-5 bg-gradient-to-t from-slate-100 dark:from-gray-900 ">
+        <>
+            <div className={"numepedWrapper flex justify-center fixed right-0 left-0 bottom-0 pb-12 bg-gradient-to-t from-slate-100 dark:from-gray-900 translate-y-[40rem] transition-transform ".concat(numpadIsOpen ? " numepadOpen" : "")}>
 
-            <form onSubmit={handleSubmit}
-                className=" addProduct rounded-xl p-4 bg-blue-800 dark:bg-blue-900 w-full max-w-[300px] shadow-xl drop-shadow-md mx-10 ">
 
-                <div className="relative w-full">
-                    <div id="numpad" >
-                        <div id="value" className="bg-gray-300/20 dark:bg-gray-900/20  mb-2 rounded-lg flex p-2">
-                            <select
-                                name="selectedProduct"
-                                onChange={handleType}
-                                value={newItem.type.id}
-                                className=" items-center p-2 h-8 mt-1 text-sm font-medium text-center text-gray-900 bg-gray-200  dark:text-gray-200 dark:bg-slate-700 border-none rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focusbg-gray-500 " >
+                <form onSubmit={handleSubmit}
+                    className=" addProduct rounded-xl p-4  w-full max-w-[300px]  mx-10  opacity-0  transition-opacity">
 
-                                {products.map((product, i) => (<option key={product.id} value={i} >{product.name}</option>))}
 
-                            </select>
-                            <div className="numpadInputWrapper w-full">
-                                <span>{valueStr}</span>
+                    <div className="relative w-full">
+                        <div id="numpad" className="">
+                            <div id="value" className="bg-gray-300/20 dark:bg-gray-900/20  mb-2 rounded-lg flex p-2">
+                                <select
+                                    name="selectedProduct"
+                                    onChange={handleType}
+                                    value={newItem.type.id}
+                                    className=" items-center p-2 h-8 mt-1 text-sm font-medium text-center text-gray-900 bg-gray-200  dark:text-gray-200 dark:bg-slate-700 border-none rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focusbg-gray-500 " >
+
+                                    {products.map((product, i) => (<option key={product.id} value={i} >{product.name}</option>))}
+
+                                </select>
+                                <div className="numpadInputWrapper w-full">
+                                    <span>{valueStr}</span>
+                                </div>
+                                <div className="backspaceWrapper" onClick={handleBackspace}>
+                                    <BsBackspace />
+                                </div>
                             </div>
-                            <div className="backspaceWrapper" onClick={handleBackspace}>
-                                <BsBackspace />
+                            <div id="numbers" className='gap-1'>
+                                <div className="OneToNine gap-1">
+                                    {
+                                        [...Array(9)].map((x, i) => {
+                                            x = ++i
+                                            return <button type="button" key={i} value={x} onClick={handlePressNumber}>{x}</button>
+                                        })
+                                    }
+                                </div>
+                                <div className="zeroAndEnter gap-1">
+                                    <button type="button" value={0} onClick={handlePressNumber} >0</button>
+                                    <button className="enter" type="submit" value={"E"} >
+                                        <BsArrowReturnLeft className='inline-flex' strokeWidth={0.5} />
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div id="numbers" className='gap-1'>
-                            <div className="OneToNine gap-1">
-                                {
-                                    [...Array(9)].map((x, i) => {
-                                        x = ++i
-                                        return <button type="button" key={i} value={x} onClick={handlePressNumber}>{x}</button>
-                                    })
-                                }
-                            </div>
-                            <div className="zeroAndEnter gap-1">
-                                <button type="button" value={0} onClick={handlePressNumber} >0</button>
-                                <button className="enter" type="submit" value={"E"} >
-                                    <BsArrowReturnLeft className='inline-flex' strokeWidth={0.5} />
-                                </button>
-                            </div>
-                        </div>
+
+
                     </div>
-                </div>
-            </form>
-        </div>
+                </form>
 
+
+            </div>
+            <button type="button" onClick={toggleNumepad}
+                className=" rounded-full bg-blue-600 text-white p-2 fixed bottom-1  w-[150px] flex">
+                {numpadIsOpen ? <><BsChevronDown /> Bezárás</> : <><BsPlusLg /> Új termék</>}
+            </button>
+        </>
     )
 }
 
