@@ -57,6 +57,10 @@ export default function Table() {
             </tr>
           </tbody>
         </table>
+
+
+        <button type="button" onClick={()=>{localStorage.clear()}}>Adat ürítés</button>
+
       </div>
 
     </>
