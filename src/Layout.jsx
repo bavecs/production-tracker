@@ -24,20 +24,10 @@ function App() {
       <Header workingHourName={workingHours.name} />
 
 
-
-       <div className="flex">{/*
-        <div className="flex fixed z-20 top-5 left-5">
-          <button type="button" className="inline-flex items-center p-3 text-lg text-gray-700 rounded-lg mr-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-search" aria-expanded="false">
-            <span className="sr-only">Menü</span>
-            <BsList className="text-m" />
-          </button>
-          <a className="flex items-center">
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">MS6-LF</span>
-          </a>
-        </div> */}
+       <div className="flex bg-slate-100/50 dark:bg-gray-800">
 
         {/* <Sidebar /> */}
-        <div className="container mx-auto px-6 max-w-md" >
+        <div className="container mx-auto my-3 px-6 max-w-md" >
           <ThemeContext.Provider value="dark">
             <Outlet />
           </ThemeContext.Provider>

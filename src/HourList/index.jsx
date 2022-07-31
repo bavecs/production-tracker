@@ -68,17 +68,11 @@ export default function HourList() {
 
 
     return (
-        <div className="
-            mt-3 mb-[300px]
-        ">
+        <div className=" mt-3 mb-[320px] ">
             <div className="mb-3">
 
 
-                {hours.map((hourItem, i) =>
-                (
-                    <Hour key={i} data={hourItem} handleHourSelection={(n) => handleHourSelection(n)} />
-                )
-                )}
+                {hours.map((hourItem, i) => (<Hour key={i} data={hourItem} handleHourSelection={(n) => handleHourSelection(n)} />))}
 
             </div>
 

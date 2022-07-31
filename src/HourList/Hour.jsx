@@ -27,7 +27,7 @@ export default function Hour({ data, handleHourSelection }) {
 
     const editTogler = useRef();
     const hourWrapperRef = useRef();
-    
+
 
 
     const [onEdit, toggleEdit] = useReducer((onEdit, action) => {
@@ -39,19 +39,19 @@ export default function Hour({ data, handleHourSelection }) {
 
 
 
-    
+
 
     const toggleSelection = (e) => {
         // console.log(editTogler.current)
         // .replaceWith(box.cloneNode(true));
 
-       if (e.target.parentNode.id === "toggleEditParent" ||
-       e.target === editTogler.current ||
-       editTogler.current.contains(e.target)
-       )  return 
+        if (e.target.parentNode.id === "toggleEditParent" ||
+            e.target === editTogler.current ||
+            editTogler.current.contains(e.target)
+        ) return
 
-       if (onEdit) return 
-        
+        if (onEdit) return
+
         handleHourSelection(hourData.hour)
     }
 
@@ -63,12 +63,12 @@ export default function Hour({ data, handleHourSelection }) {
 
         setItems(data.items);
 
-        
+
 
         setAchived(items.reduce((prev, item) => prev + item.quantity, 0));
 
 
-        if(!data.selected && onEdit) toggleEdit("CLOSE")
+        if (!data.selected && onEdit) toggleEdit("CLOSE")
 
         // setNormal(() => {
         //     //  return 0
@@ -76,7 +76,7 @@ export default function Hour({ data, handleHourSelection }) {
 
         //     let res = items.reduce((prev, item) =>
         //         (prev < mapGet(item.type.normal, 60)) ? prev : item)
-                
+
         //     return res.type.normal.find((n) => n.key === hourData.minutes).value
 
         // });
@@ -89,7 +89,7 @@ export default function Hour({ data, handleHourSelection }) {
 
 
     return (
-        <div className="h-0 overflow-visible mb-[90px]">
+        <div className="h-0 overflow-visible mb-[100px]">
             <div
                 ref={hourWrapperRef}
                 className={`hourWrapper bg-white   rounded-[0.8rem] border border-gray-100 overflow-hidden
@@ -98,55 +98,54 @@ export default function Hour({ data, handleHourSelection }) {
                 ${hourData.selected ? 'selectedHour' : ''}
                 ${onEdit ? 'onEditHour' : ''}
             `}
-            onClick={e => toggleSelection(e)}
+                onClick={e => toggleSelection(e)}
             >
                 <div
                     className={`
                     hour
                     rounded-xl
-                    box-content
                     bg-white dark:bg-gray-900 dark:text-white
-            `   
+            `
                     }
-                    >
-                        <div className="flex justify-between px-2">
-                            <div className="break">
-                                {hourData.break &&
-                                    <span className="text-xs text-slate-700 "><span role="img" aria-label="sheep">☕</span> {`${60 - hourData.minutes} p`}</span>
-                                }
-                            </div>
-                            <div className="info flex" id="toggleEditParent">
-                                <span className="flex text-xs m-[5px] mr-4 text-slate-600"><FaUserAlt className="mr-1 mt-[3px] text-[10px]" />{operators}</span>
-                                <span
-                                    ref={editTogler}
-                                    onClick={() => hourData.selected ? toggleEdit() : false}
-                                    className="normal-values rounded-lg rounded-t-none px-2 py-0 "
-                                    id="hourEditorToggle">
-                                    <b className={`
+                >
+                    <div className="flex justify-between px-2">
+                        <div className="break">
+                            {hourData.break &&
+                                <span className="text-xs text-slate-700 dark:text-gray-400"><span role="img" aria-label="sheep">☕</span> {`${60 - hourData.minutes} p`}</span>
+                            }
+                        </div>
+                        <div className="info flex" id="toggleEditParent">
+                            <span className="flex text-xs m-[5px] mr-4 text-slate-600 dark:text-slate-400"><FaUserAlt className="mr-1 mt-[3px] text-[10px]" />{operators}</span>
+                            <span
+                                ref={editTogler}
+                                onClick={() => hourData.selected ? toggleEdit() : false}
+                                className="normal-values rounded-lg rounded-t-none px-2 py-0 "
+                                id="hourEditorToggle">
+                                <b className={`
                                             text-xs
                                             backdrop: ${(achived >= normal && achived != 0) ? 'positive' : (achived < normal) ? 'negative' : ''}`
-                                        }
-                                        >
-                                        {achived}</b>  <b className="text-xs font-normal">/ {normal}</b>
-                                         <BsFillCaretDownFill className="inline-flex fill-white text-[12px] ml-1"/>
-                                         </span>
-                            </div>
+                                }
+                                >
+                                    {achived}</b>  <b className="text-xs font-normal">/ {normal}</b>
+                                <BsFillCaretDownFill className="inline-flex fill-white text-[12px] ml-1" />
+                            </span>
                         </div>
-                    <div className="p-3 pt-1 flex " >
-                        <div className="time box-content w-[2rem] pr-1 border-r border-r-gray-200 mr-2">
-                            <h1 className='font-bold text-center'>{hourData.hour}</h1>
+                    </div>
+                    <div className="productWrapper py-3 px-0 pt-1 flex overflow-hidden w-max" >
+                        <div className="time box-content w-[3rem] text-center border-r border-r-gray-200 dark:border-r-gray-700 mr-2">
+                            <h1 className='font-bold text-center text-xl w-full dark:text-gray-300'>{hourData.hour}</h1>
                         </div>
-                        <div className="products flex-none">
+                        <div className="products flex flex-nowrap flex-1">
                             {items && items.map((item, i) => (
                                 <span key={i}
-                                    className="text-xs bg-green-400 text-white p-1 rounded m-1 inline-block"
-                                ><b>{item.quantity}</b> {item.type.name}</span>
+                                    className={"product p-1 rounded m-1 inline-block text-teal-400 border border-teal-400 dark:border-teal-500 bg-teal-400/10 text-sm	".concat(item.type.measure ? " measure" : "")}
+                                ><b className="text-teal-400">{item.quantity}</b> {item.type.name}</span>
                             ))}
                         </div>
-            
+
                     </div>
                 </div>
-                <EditHour items={items} postNormal={handleNormal}/>
+                <EditHour items={items} postNormal={handleNormal} />
             </div>
         </div>
     )
