@@ -4,7 +4,7 @@ import numpad from "../css/numpad.css"
 import { BsArrowReturnLeft, BsBackspace, BsChevronDown, BsPlusLg } from 'react-icons/bs'
 
 
-function AddProduct({ products, onSubmit }) {
+function AddProduct({ products, hasSelected, onSubmit }) {
 
     const [newItem, setNewItem] = useState({ type: products[0], quantity: '' });
 
@@ -18,6 +18,11 @@ function AddProduct({ products, onSubmit }) {
             quantity: parseInt(valueStr)
         })
     }, [valueStr])
+
+
+    useEffect(() => {
+        toggleNumpadIsOpen(hasSelected)
+    }, [hasSelected])
 
     function handleType(e) {
         setNewItem({
@@ -73,8 +78,7 @@ function AddProduct({ products, onSubmit }) {
 
     return (
 
-        <>
-            <div className={"numepedWrapper flex justify-center fixed right-0 left-0 bottom-0 pb-12 bg-gradient-to-t from-slate-100 dark:from-gray-900 translate-y-[40rem] transition-transform ".concat(numpadIsOpen ? " numepadOpen" : "")}>
+            <div className={"numepedWrapper flex justify-center fixed right-0 left-0 bottom-0 pb-8 bg-gradient-to-t from-slate-100 dark:from-gray-900 translate-y-[40rem] transition-transform ".concat(numpadIsOpen ? " numepadOpen" : "")}>
 
 
                 <form onSubmit={handleSubmit}
@@ -118,17 +122,16 @@ function AddProduct({ products, onSubmit }) {
                             </div>
                         </div>
 
-
+                        <button type="button" onClick={toggleNumepad}
+                            className=" text-white absolute bottom-0 left-0 h-11 w-[4rem] flex items-center justify-center p-3 m-1">
+                            <BsChevronDown strokeWidth={.4}/> 
+                        </button>
                     </div>
                 </form>
 
 
             </div>
-            <button type="button" onClick={toggleNumepad}
-                className=" rounded-full bg-blue-600 text-white p-2 fixed bottom-1  w-[150px] flex">
-                {numpadIsOpen ? <><BsChevronDown /> Bezárás</> : <><BsPlusLg /> Új termék</>}
-            </button>
-        </>
+
     )
 }
 

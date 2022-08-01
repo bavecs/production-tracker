@@ -40,12 +40,22 @@ export default function HourList() {
 
 
     const handleHourSelection = (n) => {
-        setHours(hours.map(obj =>
-            ({ ...obj, selected: obj.hour === n && !obj.selected })
-        ));
+
+        let hasSelected = false
+
+        setHours(hours.map(obj =>{
+
+            let selected = obj.hour === n && !obj.selected
+
+            if(selected) hasSelected = true
+            
+            return { ...obj, selected: selected }
+        }));
+
+        setSelectedHour(hasSelected)
         
 
-    }
+    }   
 
     const handleNewItem = (newItem) => {
 
@@ -77,7 +87,7 @@ export default function HourList() {
             </div>
 
 
-            <AddProduct products={products} onSubmit={(e) => handleNewItem(e)} />
+            <AddProduct products={products} hasSelected={selectedHour} onSubmit={(e) => handleNewItem(e)} />
 
         </div>
     );

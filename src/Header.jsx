@@ -11,7 +11,7 @@ const s = () => {
 
 }
 
-function Header({ workingHourName }) {
+function Header({ workingHourName, setSidebarState }) {
 
     return (
         <>
@@ -19,7 +19,7 @@ function Header({ workingHourName }) {
                 <div className="container flex flex-wrap justify-between items-center mx-auto ">
 
                     <div className="flex">
-                        <button type="button" className="inline-flex items-center p-3 text-lg text-gray-700 rounded-lg mr-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-search" aria-expanded="false">
+                        <button type="button" onClick={() => setSidebarState(true)} className="inline-flex items-center p-3 text-lg text-gray-700 rounded-lg mr-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-search" aria-expanded="false">
                             <span className="sr-only">Menü</span>
                             <BsList className="text-m w-5" strokeWidth={0.7}/>
                         </button>

@@ -17,16 +17,17 @@ import { BsFillFileEarmarkPlusFill, BsFillFileRuledFill, BsPlayFill, BsList } fr
 
 function App() {
   const [workingHours, setWorkingHours] = useState(workingHoursJson[0])
+  const [sidebarState, setSidebarState] = useState(false)
 
 
   return (
     <>
-      <Header workingHourName={workingHours.name} />
-
+      <Sidebar sidebarState={sidebarState} setSidebarState={setSidebarState} />
+      <Header workingHourName={workingHours.name} setSidebarState={setSidebarState} />
 
        <div className="flex bg-slate-100/50 dark:bg-gray-800">
 
-        {/* <Sidebar /> */}
+        
         <div className="container mx-auto my-3 px-6 max-w-md" >
           <ThemeContext.Provider value="dark">
             <Outlet />
