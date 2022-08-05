@@ -5,12 +5,12 @@ import {
   Outlet
 } from "react-router-dom";
 
-import Header from "./Header"
-import Sidebar from "./Sidebar"
+import Header from "./components/Header"
+import Sidebar from "./components/Sidebar"
 
-import workingHoursJson from "./data/workingHours.json"
+import workingHoursJson from "../stores/workingHours.json"
 
-import ThemeContext from './themeContext';
+import ThemeContext from '../utils/Providers/themeContext';
 
 import { BsFillFileEarmarkPlusFill, BsFillFileRuledFill, BsPlayFill, BsList } from "react-icons/bs";
 

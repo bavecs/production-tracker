@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import numpad from "../css/numpad.css"
+import numpad from "./numpad.css"
 
 import { BsArrowReturnLeft, BsBackspace, BsChevronDown, BsPlusLg } from 'react-icons/bs'
 
 
-function AddProduct({ products, hasSelected, onSubmit }) {
+function AddProduct({ products, hasSelected, onSubmit, openNumpad}) {
 
     const [newItem, setNewItem] = useState({ type: products[0], quantity: '' });
 
@@ -19,10 +19,6 @@ function AddProduct({ products, hasSelected, onSubmit }) {
         })
     }, [valueStr])
 
-
-    useEffect(() => {
-        toggleNumpadIsOpen(hasSelected)
-    }, [hasSelected])
 
     function handleType(e) {
         setNewItem({
@@ -73,6 +69,8 @@ function AddProduct({ products, hasSelected, onSubmit }) {
     const toggleNumepad = () => {
         toggleNumpadIsOpen(!numpadIsOpen);
     }
+
+    
 
 
 

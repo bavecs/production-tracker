@@ -4,7 +4,7 @@ import { BsPersonPlusFill, BsPeopleFill } from 'react-icons/bs'
 
 import Operator from "./Operator"
 
-import { ProductContext } from '../ContextProviders/productContext';
+import { ProductContext } from '../../utils/Providers/productContext';
 
 const mapGet = (array, hour) => {
     const map = new Map();

@@ -7,16 +7,24 @@ import {
   Route,
 } from "react-router-dom";
 
-import HourList from "./HourList"
+/*
+ Pages
+*/
+import Playground from "./pages/Playground"
+import Summerize from './pages/Summerize'
+import Normal from './pages/Normal'
+import TicTacToe from './pages/TicTacToe'
 
 
-import Sum from './routes/sum'
-import Table from './routes/table'
+/*
+ Layout
+*/
+import Layout from './layout/DefaultLayout'
 
-import Layout from './Layout'
-
-import { ProductProvider } from './ContextProviders/productContext';
-
+/*
+ Services
+*/
+import { ProductProvider } from './utils/Providers/productContext';
 import SetUserDetails from './setUserDetails';
 import FetchUserDetails from './fetchUserDetail';
 
@@ -29,9 +37,10 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    <Route index element={<HourList />} />
-                    <Route path="sum" element={<Sum />} />
-                    <Route path="table" element={<Table />} />
+                    <Route index element={<Playground />} />
+                    <Route path="sum" element={<Summerize />} />
+                    <Route path="table" element={<Normal />} />
+                    <Route path="tt" element={<TicTacToe />} />
                     <Route path="userdetail" element={<SetUserDetails/>} />
                     <Route
                         path="user"

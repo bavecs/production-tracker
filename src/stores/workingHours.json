@@ -1,0 +1,140 @@
+[
+    {
+        "name": "Délelőtt",
+        "time": "6:00 - 14:00",
+        "workingHours": [
+            {
+                "hour": 6,
+                "minutes": 60,
+                "break": null
+            },
+            {
+                "hour": 7,
+                "minutes": 40,
+                "break": {"start": "7:30", "end": "7:50"}
+            },
+            {
+                "hour": 8,
+                "minutes": 60,
+                "break": null
+            },
+            {
+                "hour": 9,
+                "minutes": 55,
+                "break": {"start": "9:25", "end": "9:30"}
+            },
+            {
+                "hour": 10,
+                "minutes": 60,
+                "break": null
+            },
+            {
+                "hour": 11,
+                "minutes": 55,
+                "break": {"start": "11:25", "end": "11:30"}
+            },
+            {
+                "hour": 12,
+                "minutes": 60,
+                "break": null
+            },
+            {
+                "hour": 13,
+                "minutes": 55,
+                "break": null
+            }
+        ]
+    },
+    {
+        "name": "Esti",
+        "time": "22:00 - 6:00",
+        "workingHours": [
+            {
+                "hour": 22,
+                "minutes": 60,
+                "break": null
+            },
+            {
+                "hour": 23,
+                "minutes": 60,
+                "break": null
+            },
+            {
+                "hour": 0,
+                "minutes": 55,
+                "break": {"start": "0:00", "end": "0:05"}
+            },
+            {
+                "hour": 1,
+                "minutes": 60,
+                "break": null
+            },
+            {
+                "hour": 2,
+                "minutes": 40,
+                "break": {"start": "2:00", "end": "2:20"}
+            },
+            {
+                "hour": 3,
+                "minutes": 60,
+                "break": null
+            },
+            {
+                "hour": 4,
+                "minutes": 55,
+                "break": {"start": "4:00", "end": "4:05"}
+            },
+            {
+                "hour": 5,
+                "minutes": 55,
+                "break": null
+            }
+        ]
+    },
+    {
+        "name": "Délutáni",
+        "time": "14:00 - 22:00",
+        "workingHours": [
+            {
+                "hour": 14,
+                "minutes": 60,
+                "break": null
+            },
+            {
+                "hour": 15,
+                "minutes": 60,
+                "break": null
+            },
+            {
+                "hour": 16,
+                "minutes": 55,
+                "break": {"start": "16:00", "end": "16:05"}
+            },
+            {
+                "hour": 17,
+                "minutes": 40,
+                "break": {"start": "17:40", "end": "18:00"}
+            },
+            {
+                "hour": 18,
+                "minutes": 60,
+                "break": null
+            },
+            {
+                "hour": 19,
+                "minutes": 60,
+                "break": null
+            },
+            {
+                "hour": 20,
+                "minutes": 55,
+                "break": {"start": "20:00", "end": "20:05"}
+            },
+            {
+                "hour": 21,
+                "minutes": 55,
+                "break": null
+            }
+        ]
+    }
+]

@@ -1,20 +1,20 @@
 import React, { useEffect, useReducer, useState, useRef } from 'react'
 
-import EditHour from "./editHour"
+import EditHour from "./EditHour"
 
 import { FaUserAlt } from "react-icons/fa";
-import { BsFillCaretDownFill } from "react-icons/bs";
+import { BsFillCaretDownFill, BsPlusLg } from "react-icons/bs";
+
+import Item from "./components/Item"
 
 
-let getHour = new Date().getHours();
-
-
-export default function Hour({ data, handleHourSelection }) {
+export default function Hour({ data, handleHourSelection, removeItem }) {
 
 
     const [hourData, setData] = useState({});
 
     const [isActive, setIsActive] = useState(false);
+    const [isSelected, setIsSelected] = useState(false);
 
     const [achived, setAchived] = useState(0);
 
@@ -29,16 +29,11 @@ export default function Hour({ data, handleHourSelection }) {
     const hourWrapperRef = useRef();
 
 
-
     const [onEdit, toggleEdit] = useReducer((onEdit, action) => {
 
         return action ? action === "OPEN" : !onEdit
 
     }, false);
-
-
-
-
 
 
     const toggleSelection = (e) => {
@@ -55,11 +50,17 @@ export default function Hour({ data, handleHourSelection }) {
         handleHourSelection(hourData.hour)
     }
 
+    const select = () => {
+        if (isSelected || onEdit) return
+
+        setIsSelected(true)
+        handleHourSelection(hourData.hour)
+    }
+
 
     useEffect(() => {
         setData(data);
 
-        setIsActive(data.hour === getHour);
 
         setItems(data.items);
 
@@ -67,7 +68,7 @@ export default function Hour({ data, handleHourSelection }) {
 
         setAchived(items.reduce((prev, item) => prev + item.quantity, 0));
 
-
+        if (!data.selected && isSelected) setIsSelected(false)
         if (!data.selected && onEdit) toggleEdit("CLOSE")
 
         // setNormal(() => {
@@ -81,24 +82,28 @@ export default function Hour({ data, handleHourSelection }) {
 
         // });
 
-    }, [data, getHour, items])
+    }, [data, items])
 
     const handleNormal = value => {
         setNormal(value);
     }
 
+    const openNumpadHandler = () => {
+
+    }
+
+
 
     return (
-        <div className="h-0 overflow-visible mb-[100px]">
+        <div className=" overflow-visible my-4">
             <div
                 ref={hourWrapperRef}
                 className={`hourWrapper bg-white   rounded-[0.8rem] border border-gray-100 overflow-hidden
                 transition-transform ease-in-out         dark:bg-gray-900   dark:border-gray-700    
-                ${isActive ? 'activeHour	' : ''}
                 ${hourData.selected ? 'selectedHour' : ''}
                 ${onEdit ? 'onEditHour' : ''}
             `}
-                onClick={e => toggleSelection(e)}
+                onClick={select}
             >
                 <div
                     className={`
@@ -136,11 +141,18 @@ export default function Hour({ data, handleHourSelection }) {
                             <h1 className='font-bold text-center text-xl w-full dark:text-gray-300'>{hourData.hour}</h1>
                         </div>
                         <div className="products flex flex-nowrap flex-1">
-                            {items && items.map((item, i) => (
-                                <span key={i}
-                                    className={"product p-1 rounded m-1 inline-block text-teal-400 border border-teal-400 dark:border-teal-500 bg-teal-400/10 text-sm	".concat(item.type.measure ? " measure" : "")}
-                                ><b className="text-teal-400">{item.quantity}</b> {item.type.name}</span>
+                            {data.items && data.items.map((item, i) => (
+                                <Item key={i} item={item} remove={() => removeItem(item)} >
+                                    <b className="text-teal-400 mr-1">{item.quantity}</b> 
+                                    {item.type.name}
+                                </Item>
                             ))}
+                            { data.selected &&
+                            <span onClick={openNumpadHandler}
+                                className="p-1 rounded m-1  bg-blue-600 text-white  dark:border-blue-500 text-sm unselectable px-2">
+                                <BsPlusLg className="inline-flex w-2 h-2 mb-1" strokeWidth={1.3}/>
+                                {null}
+                            </span>}
                         </div>
 
                     </div>

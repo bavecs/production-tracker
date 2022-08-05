@@ -56,13 +56,10 @@
 
         transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 80ms;
 
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none;
+
 }
+
+
 
 #numbers button:active {
     transition-duration: 0s;

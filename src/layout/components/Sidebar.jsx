@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+
+import { Button } from "../../components/UiElements"
 
 import *  as Bs from 'react-icons/bs'
+
+import { ProductContext }  from '../../utils/Providers/productContext'
 
 function Sidebar({ sidebarState, setSidebarState }) {
     const [sidebarIsOpen, setSidebarIsOpen] = useState(false)
 
+    const {user} = useContext(ProductContext)
 
     const sidebarData = [
         {
@@ -49,6 +54,19 @@ function Sidebar({ sidebarState, setSidebarState }) {
         <div className={"sidebarWrapper".concat(sidebarIsOpen ? " sidebarOpen" : "")}>
 
             <div id="drawer-navigation" className="fixed z-40 h-screen p-4 overflow-y-auto bg-white w-80 -translate-x-80 dark:bg-gray-800 transition-transform">
+
+                
+
+
+                    <div className="flex gap-5 flex-row items-center p-1 my-5">
+                        <span className="block rounded-full shadow-md bg-black text-xl p-3">👦</span>
+                        <div>
+                            
+                            <h5 className="text-lg font-medium text-gray-900 dark:text-white">Username</h5>
+                            <a href="" className="text-slate-500 font-medium underline text-sm mr-1">Profilom</a> 
+                        </div>
+                    </div>
+
 
                 <h5 id="drawer-navigation-label" className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400">Menü</h5>
 

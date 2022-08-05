@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+body {
+    @apply dark:bg-gray-800
+}
+
+
+.activeHour {
+    @apply border-green-600 border-2 box-content bg-white;
+    box-shadow: 0 5px -3px rgb(42, 198, 28);
+}
+
+.selectedHour {
+    @apply border-blue-600 scale-105;
+    box-shadow: 0 0 0px 1px rgb(37 99 235);
+}
+
+.selectedHour .normal-values {
+    @apply bg-blue-600 focus:bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 !text-white cursor-pointer
+}
+
+
+
+.selectedHour .productWrapper {
+    @apply w-full
+}
+
+.selectedHour .products {
+    @apply flex-wrap
+}
+
+.selectedHour .normal-values b {
+    @apply  text-white
+}
+
+.selectedHour {
+    @apply bg-blue-600
+}
+
+.hourWrapper .editPanel {
+    max-height: 0px;
+    transition-property: max-height;
+    transition-timing-function: ease-in-out;
+    transition-property: max-height;
+    @apply bg-blue-600 
+}
+
+.hourWrapper.onEditHour .editPanel {
+    max-height: 400px;
+}
+
+
+.positive {
+    @apply text-green-600
+}
+
+.negative {
+    @apply text-red-600
+}
+
+
+
+
+
+
+nav .active {
+    @apply  !text-blue-600 bg-gray-100  dark:bg-gray-800 dark:text-blue-500;
+}
+
+nav .active .nav-title {
+    @apply block ;
+}
+
+
+.sidebarWrapper.sidebarOpen #drawer-navigation {
+    @apply translate-x-0 drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)] transition-transform 
+}
+
+.itemWrapper.measure .product,
+.itemWrapper.selected.measure {
+    @apply bg-teal-400 dark:bg-teal-500 text-white
+}
+
+.itemWrapper.measure .product b {
+    @apply text-white
+}
+
+.itemWrapper.selected .product {
+    @apply
+        border-transparent
+}
+
+
+
+.itemWrapper svg {
+    @apply
+        my-[0.6rem]     mx-[0.2rem] ml-0
+        w-[1.2rem]      h-[1.2rem]
+        p-[0.3rem]
+        -translate-x-7
+        transition-transform
+        -z-0
+}
+
+.itemWrapper.selected svg {
+    @apply
+        translate-x-0
+}
+
+.itemWrapper {
+    margin-right: -1.6rem;
+    padding-right: 0.24rem;
+    @apply
+        transition-transform
+        rounded-md
+        z-0
+        border
+        border-transparent
+
+}
+
+.itemWrapper.selected {
+    z-index: 1;
+    background: #e9fbf9;
+    margin-right: -1.6rem;
+    @apply
+        scale-110
+        shadow-md
+        z-10
+        border-teal-400
+        dark:border-teal-500
+}
+
+
+.unselectable {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+}

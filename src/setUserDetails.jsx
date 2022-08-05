@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 
-import { ProductContext } from "./ContextProviders/productContext";
+import { ProductContext } from "./utils/Providers/productContext";
 import {
   useNavigate
 } from "react-router-dom";
