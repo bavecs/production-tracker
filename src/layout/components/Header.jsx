@@ -11,7 +11,7 @@ const s = () => {
 
 }
 
-function Header({ workingHourName, setSidebarState }) {
+function Header({setSidebarState }) {
 
     return (
         <>

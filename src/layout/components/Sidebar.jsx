@@ -4,18 +4,18 @@ import { Button } from "../../components/UiElements"
 
 import *  as Bs from 'react-icons/bs'
 
-import { ProductContext }  from '../../utils/Providers/productContext'
+import { UserContext }  from '../../utils/Providers/userContext'
 
 function Sidebar({ sidebarState, setSidebarState }) {
     const [sidebarIsOpen, setSidebarIsOpen] = useState(false)
 
-    const {user} = useContext(ProductContext)
+    const {user} = useContext(UserContext)
 
     const sidebarData = [
         {
             id: 0,
             icon: Bs.BsTrashFill,
-            name: "Adatok kiürítése",
+            name: "Új műszak",
             onClickFunction: () => {
                 localStorage.clear()
                 window.location.reload()
@@ -59,10 +59,10 @@ function Sidebar({ sidebarState, setSidebarState }) {
 
 
                     <div className="flex gap-5 flex-row items-center p-1 my-5">
-                        <span className="block rounded-full shadow-md bg-black text-xl p-3">👦</span>
+                        <span className="block rounded-full shadow-md bg-black text-xl p-3">{user.emoji}</span>
                         <div>
                             
-                            <h5 className="text-lg font-medium text-gray-900 dark:text-white">Username</h5>
+                            <h5 className="text-lg font-medium text-gray-900 dark:text-white">{user.name}</h5>
                             <a href="" className="text-slate-500 font-medium underline text-sm mr-1">Profilom</a> 
                         </div>
                     </div>

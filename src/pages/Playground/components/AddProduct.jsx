@@ -2,21 +2,28 @@ import React, { useEffect, useState } from 'react'
 import numpad from "./numpad.css"
 
 import { BsArrowReturnLeft, BsBackspace, BsChevronDown, BsPlusLg } from 'react-icons/bs'
+import { useNumpad } from '../../../utils/Providers/numpadProvider';
 
 
-function AddProduct({ products, hasSelected, onSubmit, openNumpad}) {
+function AddProduct({ products }) {
 
     const [newItem, setNewItem] = useState({ type: products[0], quantity: '' });
 
     const [valueStr, setValueStr] = useState("0")
 
-    const [numpadIsOpen, toggleNumpadIsOpen] = useState(false)
+    
+    const [numpadIsOpen, toggleNumpadIsOpen] = useNumpad().numpadIsActiveState
+    const [numpadValue, setNumpadValue] = useNumpad().numpadValue
+    const builderMethod = useNumpad().builderMethod
+    
 
     useEffect(() => {
+        
         setNewItem({
             ...newItem,
             quantity: parseInt(valueStr)
         })
+        setNumpadValue({...numpadValue, quantity: parseInt(valueStr)})
     }, [valueStr])
 
 
@@ -25,6 +32,7 @@ function AddProduct({ products, hasSelected, onSubmit, openNumpad}) {
             ...newItem,
             type: products[e.target.value]
         });
+        
     }
 
 
@@ -32,8 +40,8 @@ function AddProduct({ products, hasSelected, onSubmit, openNumpad}) {
         e.preventDefault();
 
         if (valueStr === "0") return
-
-        onSubmit(newItem)
+        
+        builderMethod(newItem)
 
         setValueStr("0")
         setNewItem({ ...newItem, quantity: '' })
@@ -47,8 +55,6 @@ function AddProduct({ products, hasSelected, onSubmit, openNumpad}) {
         if (valueStr.length > 2) return
 
         setValueStr((valueStr === "0") ? val : valueStr + val)
-
-
 
     }
 

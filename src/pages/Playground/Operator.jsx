@@ -4,11 +4,14 @@ import { BsFillPersonFill, BsXLg } from "react-icons/bs";
 
 
 export default function Operator({operator, updateOperator, removeOperator, products}) {
-    const [selected, setSelected] = useState(products[0].id)
+    const [selected, setSelected] = useState(0)
     const [customValue, setCustomValue] = useState()
     const [customValueInput, setCustomValueInput] = useState(false)
 
+
     useEffect(()=> {
+        if (typeof products != "array") return
+
         if (operator.onDefaultValue)
             setSelected(products[0].id)
     }, [products]);
@@ -87,8 +90,7 @@ export default function Operator({operator, updateOperator, removeOperator, prod
                     }
                         
                     }
-                    className="bg-gray-50 h-9 p-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-22
-                    " placeholder="Normál érték"/>)
+                    className="bg-gray-50 h-9 p-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-22" placeholder="Normál érték"/>)
                 
             }
             

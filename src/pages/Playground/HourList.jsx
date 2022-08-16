@@ -1,25 +1,26 @@
-import React from 'react'
-
-export default ({children, hours, Component}) => {
+import React, {useState} from 'react'
 
 
-    const renderHour = (i, hour) => (
-        <Component key={i} 
+export default ({
+    hours,
+    hourComponent: HourComponent,
+    selectedHourState
+}) => {
+
+    const [selectedHour, setSelectedHour] = selectedHourState
+
+
+    const renderHourElement =  (hour, i) =>
+        <HourComponent
+            key={i}
             data={hour}
-            handleHourSelection={(n) => handleHourSelection(n)}
-            removeItem={(el) => Item.remove(hour.hour, el)} >
-            {children}
-        </Component>)
+
+            selected={selectedHour && selectedHour === hour.hour}
+            onSelect={n => setSelectedHour(n)} />
+
+    return hours.map((hour, i) => renderHourElement(hour, i))
+
     
-    return hours.map((hour, i) => (
-        <Component key={i} 
-            data={hour}
-            handleHourSelection={(n) => handleHourSelection(n)}
-            removeItem={(el) => Item.remove(hour.hour, el)} >
-
-            {children}
-            
-        </Component>)
         
     
 }

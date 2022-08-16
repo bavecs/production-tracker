@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   BrowserRouter,
@@ -13,6 +13,7 @@ import {
 import Playground from "./pages/Playground"
 import Summerize from './pages/Summerize'
 import Normal from './pages/Normal'
+import Hall from './pages/Hall'
 import TicTacToe from './pages/TicTacToe'
 
 
@@ -20,35 +21,40 @@ import TicTacToe from './pages/TicTacToe'
  Layout
 */
 import Layout from './layout/DefaultLayout'
-
 /*
  Services
 */
-import { ProductProvider } from './utils/Providers/productContext';
-import SetUserDetails from './setUserDetails';
-import FetchUserDetails from './fetchUserDetail';
+import { UserContextProvider } from './utils/Providers/userContext';
 
+import { HoursContextProvider } from './utils/Providers/hoursProvider'
 
 
 function App() {
 
+  const hasSetup = (localStorage.getItem("hours"))
+
   return (
-    <ProductProvider>
+    <UserContextProvider>
+      <HoursContextProvider>
         <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<Playground />} />
-                    <Route path="sum" element={<Summerize />} />
-                    <Route path="table" element={<Normal />} />
-                    <Route path="tt" element={<TicTacToe />} />
-                    <Route path="userdetail" element={<SetUserDetails/>} />
-                    <Route
-                        path="user"
-                        element={<FetchUserDetails />} />
-                </Route>
-            </Routes>
+          <Routes>
+        
+              {!hasSetup &&
+                <Route index element={<Hall />} />
+              }
+              {hasSetup &&
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Playground />} />
+                <Route path="sum" element={<Summerize />} />
+                <Route path="table" element={<Normal />} />
+                <Route path="tt" element={<TicTacToe />} />
+              </Route>
+              }
+        
+          </Routes>
         </BrowserRouter>
-    </ProductProvider>
+      </HoursContextProvider>
+    </UserContextProvider>
   );
 }
 

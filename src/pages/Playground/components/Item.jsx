@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import { BsXLg } from 'react-icons/bs'
 
-export const Item = ({children, item, remove}) => {
+export const Item = ({children, measure, selectState, remove}) => {
 
-    const [isSelected, setIsSelected] = useState(false)
+    const [isSelected, setIsSelected] = selectState
 
     return (
         <div className={
                 "itemWrapper flex "
                 .concat(isSelected ? " selected" : "")
-                .concat(item.type.measure ? " measure" : "")
+                .concat(measure ? " measure" : "")
             }
-            onClick={() => setIsSelected(!isSelected)}>
+            onClick={() => setIsSelected(isSelected ? !isSelected : null)}>
 
             <span className="product p-1 rounded m-1  text-teal-400 border border-teal-400 dark:border-teal-500 bg-[#e9fbf9] text-sm outline outline-2 outline-teal-300/0 unselectable flex z-10"> 
                 {children}

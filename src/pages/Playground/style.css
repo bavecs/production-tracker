@@ -125,15 +125,14 @@ nav .active .nav-title {
 }
 
 .itemWrapper.selected {
-    z-index: 1;
     background: #e9fbf9;
     margin-right: -1.6rem;
     @apply
         scale-110
         shadow-md
-        z-10
-        border-teal-400
-        dark:border-teal-500
+        z-20
+        border-teal-300
+        dark:border-teal-300
 }
 
 

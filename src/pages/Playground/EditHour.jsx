@@ -4,7 +4,7 @@ import { BsPersonPlusFill, BsPeopleFill } from 'react-icons/bs'
 
 import Operator from "./Operator"
 
-import { ProductContext } from '../../utils/Providers/productContext';
+import useProducts from '../../utils/hooks/useProducts';
 
 const mapGet = (array, hour) => {
     const map = new Map();
@@ -17,13 +17,14 @@ const settings = {
 }
 
 
-export default function EditHour({ hour, postNormal, items }) {
+export default function EditHour({ hourMinutes, postNormal, items }) {
 
     const [productsInHour, setProductsInHour] = useState([]);
 
     const [normal, setNormal] = useState(0);
 
-    let { products } = useContext(ProductContext);
+    let [products]  = useProducts()
+
 
     const [operatorArray, setOperatorArray] = useState([
         {
@@ -41,6 +42,7 @@ export default function EditHour({ hour, postNormal, items }) {
         * Hourly products load in, and sort
         */
         setProductsInHour([]);
+        if (items)
         new Set(items.map(product => product.type.id)).forEach(id => {
 
             let product = products.find(product => product.id === id)
@@ -70,13 +72,15 @@ export default function EditHour({ hour, postNormal, items }) {
     }
 
     const updateNormal = () => {
+        console.log(hourMinutes)
+
         let normal = 0;
         operatorArray.forEach(operator => {
             if (typeof operator.selectedProductId === "number" && operator.customValue === null) {
                 let item = products.find(item => operator.selectedProductId === item.id);
-                normal = normal + mapGet(item.normal, 60)
+                normal = normal + mapGet(item.normal, hourMinutes)
             }
-            if (operator.customValue) {
+            if (operator.customValue) { 
                 console.log(operator.customValue);
 
             }
@@ -110,7 +114,7 @@ export default function EditHour({ hour, postNormal, items }) {
             {
                 operatorArray.map(operator =>
                     <Operator key={operator.id} operator={operator} updateOperator={updateOperator} removeOperator={removeOperator} products={getList} />)
-            }
+                }
 
             <div className="flex p-3 place-content-around gap-3">
 
