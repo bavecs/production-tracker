@@ -72,7 +72,6 @@ export default function EditHour({ hourMinutes, postNormal, items }) {
     }
 
     const updateNormal = () => {
-        console.log(hourMinutes)
 
         let normal = 0;
         operatorArray.forEach(operator => {
