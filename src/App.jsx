@@ -31,7 +31,7 @@ import { HoursContextProvider } from './utils/Providers/hoursProvider'
 
 function App() {
 
-  const hasSetup = (localStorage.getItem("hours"))
+  const hasSetup = (localStorage.getItem("hoursData"))
 
   return (
     <UserContextProvider>

@@ -15,7 +15,7 @@ export default ({
             key={i}
             data={hour}
 
-            selected={selectedHour && selectedHour === hour.hour}
+            selected={selectedHour === hour.hour}
             onSelect={n => setSelectedHour(n)} />
 
     return hours.map((hour, i) => renderHourElement(hour, i))

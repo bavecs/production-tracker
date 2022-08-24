@@ -3,7 +3,7 @@ import useLocalStorage from "../utils/hooks/useLocalStorage"
 
 
 export default function Sum() {
-    const [hoursData, setHoursData] = useLocalStorage('hours');
+    const [hoursData, setHoursData] = useLocalStorage('hoursData');
 
     const [items, setItems] = useState([]);
 

@@ -43,7 +43,7 @@ export const Hall = () => {
         }))
 
         localStorage.clear()
-        localStorage.setItem("hours", JSON.stringify(workingHours))
+        localStorage.setItem("hoursData", JSON.stringify(workingHours))
         navigate(0)
     }
 
