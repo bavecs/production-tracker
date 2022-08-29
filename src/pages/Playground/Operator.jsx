@@ -4,13 +4,14 @@ import { BsFillPersonFill, BsXLg } from "react-icons/bs";
 
 
 export default function Operator({operator, updateOperator, removeOperator, products}) {
+
     const [selected, setSelected] = useState(0)
     const [customValue, setCustomValue] = useState()
     const [customValueInput, setCustomValueInput] = useState(false)
 
 
     useEffect(()=> {
-        if (typeof products != "array") return
+        if (!products.length) return
 
         if (operator.onDefaultValue)
             setSelected(products[0].id)

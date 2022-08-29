@@ -41,25 +41,33 @@ export default function EditHour({ hourMinutes, postNormal, items }) {
         /*
         * Hourly products load in, and sort
         */
-        setProductsInHour([]);
-        if (items)
-        new Set(items.map(product => product.type.id)).forEach(id => {
 
-            let product = products.find(product => product.id === id)
+        let productsInHour = [];
 
-            setProductsInHour(productsInHour => [...productsInHour, product]
-                .sort((aProduct, bProduct) => aProduct.normal[0].value - bProduct.normal[0].value));
+        if (items) {
+            new Set(items.map(product => product.type.id)).forEach(id => {
 
-        })
+                let product = products.find(product => product.id === id)
 
-    }, [normal, items, operatorArray]);
+                productsInHour = [...productsInHour, product]
+                    .sort((a, b) => a.normal[0].value - b.normal[0].value)
+
+            })
+        }
+
+        productsInHour = [...productsInHour, ...products.filter(prod => !productsInHour.includes(prod))]
+
+        setProductsInHour(productsInHour);
+
+
+    }, [items, operatorArray]);
 
     useEffect(() => {
 
         updateNormal();
         postNormal(normal);
 
-    }, [operatorArray, normal])
+    }, [operatorArray, normal, items])
 
     /*
     * Find the client operator in Operator Array and replace
@@ -74,6 +82,8 @@ export default function EditHour({ hourMinutes, postNormal, items }) {
     const updateNormal = () => {
 
         let normal = 0;
+
+        if(items.length)
         operatorArray.forEach(operator => {
             if (typeof operator.selectedProductId === "number" && operator.customValue === null) {
                 let item = products.find(item => operator.selectedProductId === item.id);
@@ -104,15 +114,13 @@ export default function EditHour({ hourMinutes, postNormal, items }) {
         setOperatorArray(operatorArray.filter(operator => operator.id != targetId))
     }
 
-    const getList = productsInHour.length ? productsInHour : products;
-
 
     return (
         <div className="editPanel easy-in-out duration-300">
 
             {
                 operatorArray.map(operator =>
-                    <Operator key={operator.id} operator={operator} updateOperator={updateOperator} removeOperator={removeOperator} products={getList} />)
+                    <Operator key={operator.id} operator={operator} updateOperator={updateOperator} removeOperator={removeOperator} products={productsInHour} />)
                 }
 
             <div className="flex p-3 place-content-around gap-3">
@@ -128,13 +136,6 @@ export default function EditHour({ hourMinutes, postNormal, items }) {
                         </button>
                     }
                     
-                    {
-                        operatorArray.length > 1 &&
-                        <button type="button" className="py-2 flex px-4 mr-2 mb-2 text-xs font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 ">
-                            <BsPeopleFill className="mr-2 -ml-1 w-4 h-4" />
-                            Közös normál
-                        </button>
-                    }
 
 
             </div>

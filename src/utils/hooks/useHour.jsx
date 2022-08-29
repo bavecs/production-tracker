@@ -1,13 +1,27 @@
 import { useEffect, useState, useContext } from "react"
 
-import { HoursContext } from '../../utils/Providers/hoursProvider'
+import { HoursContext } from '../Providers/hoursProvider'
+
+const operatorTemplate = {
+    id: 0,
+    onDefaultValue: true,
+    selectedProductId: null,
+    customValue: null,
+    color: "rgb(132 204 22)"
+}
 
 
-export const useItems = (h_id, fallback) => {
+export const useHour = (h_id, fallback) => {
 
     const [hoursCnt, sethoursCnt] = useContext(HoursContext) ?? []
 
     const [items, setItems] = useState([])
+
+    const [normal, setNormal] = useState(0)
+
+    const [achived, setAchived] = useState(0)
+
+    const operatorState = useState([operatorTemplate])
 
     let targetHour = (hourObj) => hourObj.hour === h_id;
 
@@ -37,9 +51,25 @@ export const useItems = (h_id, fallback) => {
 
         removeItem: id => {
             setItems(items.filter(item => item.id !== id))
-        }
+        },
+
+        hourAchived: 0,
+
+        setHourAchived: n => {
+            sethoursCnt(hoursCnt.map(hourObj => {
+                return h_id === hourObj.hour ? {...hourObj, achived: n} : hourObj
+            }))
+        },
+
+        hourNormal: normal,
+
+        setHourNormal: n => setNormal(n),
+
+        hourOperatorArray: [],
+
+        setHourArray: n => []
     }
     
 }
 
-export default useItems
+export default useHour

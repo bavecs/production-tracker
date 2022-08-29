@@ -39,7 +39,8 @@ export const Hall = () => {
             ...hour,
             items: [],
             goal: 0,
-            achived: 0
+            achived: 0,
+            operators: []
         }))
 
         localStorage.clear()

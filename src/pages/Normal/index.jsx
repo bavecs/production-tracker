@@ -1,4 +1,9 @@
+import { useEffect, useState, useMemo, useContext } from "react";
+import useLocalStorage from "../../utils/hooks/useLocalStorage"
+
 export default function Table() {
+  const [hoursData] = useLocalStorage('hoursData');
+
   return (
     <>
     
@@ -11,55 +16,34 @@ export default function Table() {
                 Óra
               </th>
               <th scope="col" className="py-3 px-2">
-                Col
+                Óránkénti
               </th>
               <th scope="col" className="py-3 px-2">
-                Col
+                Összesen
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-white dark:bg-gray-800">
-              <th scope="row" className="py-4 px-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                6 - 7
-              </th>
-              <td className="py-4 px-2">
-                Item
-              </td>
+            {
+              hoursData.map(hour => (
+                  <tr className="bg-white dark:bg-gray-800">
+                    <th scope="row" className="py-4 px-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      {hour.hour } - {hour.hour + 1 }
+                    </th>
+                    <td className="py-4 px-2">
+                      {hour.achived} / {hour.goal}
+                    </td>
 
-              <td className="py-4 px-2">
-                Item
-              </td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-              <th scope="row" className="py-4 px-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                7 - 8
-              </th>
+                    <td className="py-4 px-2">
+                      - / -
+                    </td>
+                  </tr>
+                ))
+            }
 
-              <td className="py-4 px-2">
-                Item
-              </td>
-              <td className="py-4 px-2">
-                Item
-              </td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-              <th scope="row" className="py-4 px-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                8 - 9
-              </th>
 
-              <td className="py-4 px-2">
-                Item
-              </td>
-              <td className="py-4 px-2">
-                Item
-              </td>
-            </tr>
           </tbody>
         </table>
-
-
-        <button type="button" onClick={()=>{localStorage.clear()}}>Adat ürítés</button>
 
       </div>
 

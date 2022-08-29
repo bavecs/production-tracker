@@ -24,6 +24,7 @@ function AddProduct({ products }) {
             quantity: parseInt(valueStr)
         })
         setNumpadValue({...numpadValue, quantity: parseInt(valueStr)})
+        
     }, [valueStr])
 
 

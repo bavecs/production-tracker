@@ -6,7 +6,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { BsFillCaretDownFill, BsPlusLg } from "react-icons/bs";
 
 import Item from "./components/Item"
-import useItems from '../../utils/hooks/useItems';
+import useHour from '../../utils/hooks/useHour';
 
 import NormalButton from './components/normalButton';
 import { useNumpad } from '../../utils/Providers/numpadProvider';
@@ -14,7 +14,6 @@ import { useNumpad } from '../../utils/Providers/numpadProvider';
 
 export default function Hour({ data, selected, onSelect }) {
 
-    const [achived, setAchived] = useState(0);
 
 
     const [normal, setNormal] = useState(0);
@@ -23,8 +22,10 @@ export default function Hour({ data, selected, onSelect }) {
 
     const [operators, setOperators] = useState(1);
 
-    const {items, addItem, removeItem} = useItems(data.hour)
+    const hour = useHour(data.hour)
     
+    const [achived, setAchived] = useState(0)
+
 
     const [numpadIsActive, setNumpadIsActive] = useNumpad().numpadIsActiveState
     const [numpadValue, setNumpadValue] = useNumpad().numpadValue
@@ -41,6 +42,7 @@ export default function Hour({ data, selected, onSelect }) {
     const select = () => {
         if(!selected) {
             onSelect(data.hour)
+            setBuilderMethod(() => hour.addItem)
         }
     }
 
@@ -48,17 +50,17 @@ export default function Hour({ data, selected, onSelect }) {
     useEffect(() => {
         if (!selected && onEdit) toggleEdit("CLOSE")
 
-        setAchived(items ? items.reduce((prev, item) => prev + item.quantity, 0) : 0);
+        setAchived(hour.items ? hour.items.reduce((prev, item) => prev + item.quantity, 0) : 0);
 
-    }, [data, items, selected])
+    }, [data, hour.items, selected])
 
     const handleNormal = value => {
-        setNormal(value);
+        hour.setHourNormal(value);
     }
 
     const openNumpadHandler = () => {
         setNumpadIsActive(true)
-        setBuilderMethod(() => addItem)
+        
     }
 
     const hourWrapperClasses = `hourWrapper bg-white rounded-[0.8rem] border border-gray-100 overflow-hidden transition-transform ease-in-out dark:bg-gray-900 dark:border-gray-700 ${selected ? 'selectedHour ' : ''} ${onEdit ? 'onEditHour' : ' '}`
@@ -83,7 +85,7 @@ export default function Hour({ data, selected, onSelect }) {
                                 <FaUserAlt className="mr-1 mt-[3px] text-[10px]" />
                                 {operators}
                             </span>
-                            <NormalButton onClick={() => selected ? toggleEdit() : false} achived={achived} normal={normal} />
+                            <NormalButton onClick={() => selected ? toggleEdit() : false} achived={achived} normal={hour.hourNormal} />
                         </div>
                     </div>
                     <div className="productWrapper py-3 px-0 pt-1 flex overflow-hidden w-max" >
@@ -93,11 +95,11 @@ export default function Hour({ data, selected, onSelect }) {
 
                         <div className="products flex flex-nowrap flex-1">
 
-                            {items && items.map((item, i) => 
+                            {hour.items && hour.items.map((item, i) => 
                                 <Item key={i}
                                     measure={item.type.measure}
                                     selectState={[selectedItem === i, param => setSelectedItem(param ?? i)]}
-                                    remove={() => removeItem(item.id)} >
+                                    remove={() => hour.removeItem(item.id)} >
                                         <b className="text-teal-400 mr-1">
                                             {item.quantity}
                                         </b> 
@@ -117,7 +119,7 @@ export default function Hour({ data, selected, onSelect }) {
 
                     </div>
                 </div>
-                <EditHour items={items} hourMinutes={data.minutes} postNormal={handleNormal} />
+                <EditHour items={hour.items} hourMinutes={data.minutes} postNormal={handleNormal} />
             </div>
         </div>
     )
