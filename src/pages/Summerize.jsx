@@ -48,7 +48,7 @@ export default function Sum() {
 
 
     return (
-        <div>
+        <div className=" dark:text-gray-300 ">
 
             <h4 className="text-xl m-2 font-bold">Mérős</h4>
 
@@ -60,7 +60,7 @@ export default function Sum() {
                     <tbody>
                         {
                             items.filter(item => item.type.measure).map((item) => (
-                                <tr key={item.type.id} className="border-b">
+                                <tr key={item.type.id} className="border-b dark:border-gray-500">
                                     <th scope="row" className="py-4 px-6 font-medium whitespace-nowrap ">
                                         {item.type.name}
                                     </th>
@@ -72,7 +72,7 @@ export default function Sum() {
                         }
                     </tbody>
                     <tfoot>
-                        <tr className="font-semibold text-gray-900 ">
+                        <tr className="font-semibold">
                             <th scope="row" className="py-3 px-6 ">Összesesen</th>
                             <td className="py-3 px-6">{itemsMeasureCount}</td>
                         </tr>
@@ -101,7 +101,7 @@ export default function Sum() {
                     </tbody>
 
                     <tfoot>
-                        <tr className="font-semibold text-gray-900 dark:text-white">
+                        <tr className="font-semibold ">
                             <th scope="row" className="py-3 px-6 ">Összesen</th>
                             <td className="py-3 px-6">{itemCount - itemsMeasureCount}</td>
                         </tr>
