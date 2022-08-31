@@ -144,3 +144,16 @@ nav .active .nav-title {
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none;
 }
+
+
+.norm_table * {
+    text-align: center;
+}
+
+.norm_table .separator {
+    @apply text-2xl inline-flex 
+}
+
+.norm_table .val_col {
+    padding: 0;
+}

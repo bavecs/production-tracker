@@ -17,24 +17,20 @@ const settings = {
 }
 
 
-export default function EditHour({ hourMinutes, postNormal, items }) {
+export default function EditHour({hourHook, hourMinutes }) {
 
     const [productsInHour, setProductsInHour] = useState([]);
 
-    const [normal, setNormal] = useState(0);
-
     let [products]  = useProducts()
 
+    const {
+        items,
+        setHourAchived,
+        normal,
+        setNormal,
+        operatorArray,
+        setOperatorArray} = hourHook
 
-    const [operatorArray, setOperatorArray] = useState([
-        {
-            id: 0,
-            onDefaultValue: true,
-            selectedProductId: null,
-            customValue: null,
-            color: "rgb(132 204 22)"
-        }
-    ])
 
     useEffect(() => {
 
@@ -59,15 +55,11 @@ export default function EditHour({ hourMinutes, postNormal, items }) {
 
         setProductsInHour(productsInHour);
 
+        updateNormal();
+
 
     }, [items, operatorArray]);
 
-    useEffect(() => {
-
-        updateNormal();
-        postNormal(normal);
-
-    }, [operatorArray, normal, items])
 
     /*
     * Find the client operator in Operator Array and replace
@@ -94,6 +86,9 @@ export default function EditHour({ hourMinutes, postNormal, items }) {
 
             }
         });
+
+        console.log(normal);
+        console.log(operatorArray[0]);
 
         setNormal(normal);
 
