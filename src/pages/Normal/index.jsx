@@ -51,21 +51,36 @@ export default function Table() {
                   <th scope="row" className="py-4 px-2 font-medium text-gray-900 whitespace-nowrap dark:text-white border border-black">
                     {hour.hour } - {hour.hour + 1 }
                   </th>
-                  <td className="py-4 px-2 val_col">
+                  <td className="val_col">
                     { hour.achived ? (<>
-                      <b className={`backdrop: ${(hour.achived >= hour.goal) ? 'positive' :  'negative' }`}>
+
+                      <b className={`sp backdrop: ${(hour.achived >= hour.goal) ? 'positive' : 'negative'}`}>
+
                         {hour.achived}
-                        </b> <span className="separator">/</span> {hour.goal}
+
+                      </b>
+
+                      <div className="separator"></div>
+
+                      <b>{hour.goal}</b>
+
                       </>) : ''
                     }
                     
                   </td>
           
-                  <td className="py-4 px-2 val_col border  border-black">
+                  <td className="val_col border  border-black">
                   { hour.achived ? (<>
-                      <b className={`backdrop: ${(hour.allAchived >= hour.allGoal) ? 'positive' :  'negative' }`}>
+                      <b className={`sp backdrop: ${(hour.allAchived >= hour.allGoal) ? 'positive' : 'negative'}`}>
+
                         {hour.allAchived}
-                        </b> <span className="separator">/</span> {hour.allGoal}
+
+                      </b>
+
+                      <div className="separator"></div>
+
+                      <b>{hour.allGoal}</b> 
+                      
                       </>) : ''
                     }
                   </td>
