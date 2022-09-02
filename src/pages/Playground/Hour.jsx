@@ -15,17 +15,9 @@ import { useNumpad } from '../../utils/Providers/numpadProvider';
 export default function Hour({ data, selected, onSelect }) {
 
 
-
-    const [normal, setNormal] = useState(0);
-
     const [selectedItem,  setSelectedItem] = useState(null)
 
-    const [operators, setOperators] = useState(1);
-
     const hour = useHour(data.hour)
-    
-    const [achived, setAchived] = useState(0)
-
 
     const [numpadIsActive, setNumpadIsActive] = useNumpad().numpadIsActiveState
     const [numpadValue, setNumpadValue] = useNumpad().numpadValue
@@ -50,13 +42,10 @@ export default function Hour({ data, selected, onSelect }) {
     useEffect(() => {
         if (!selected && onEdit) toggleEdit("CLOSE")
 
-        setAchived(hour.items ? hour.items.reduce((prev, item) => prev + item.quantity, 0) : 0);
+        hour.setAchived(hour.items ? hour.items.reduce((prev, item) => prev + item.quantity, 0) : 0);
 
-    }, [data, hour.items, selected])
+    }, [hour.items, selected])
 
-    const handleNormal = value => {
-        hour.setHourNormal(value);
-    }
 
     const openNumpadHandler = () => {
         setNumpadIsActive(true)
@@ -83,9 +72,9 @@ export default function Hour({ data, selected, onSelect }) {
                         <div className="info flex" id="toggleEditParent">
                             <span className="flex text-xs m-[5px] mr-4 text-slate-600 dark:text-slate-400">
                                 <FaUserAlt className="mr-1 mt-[3px] text-[10px]" />
-                                {operators}
+                                {hour.operatorArray.length}
                             </span>
-                            <NormalButton onClick={() => selected ? toggleEdit() : false} achived={achived} normal={hour.hourNormal} />
+                            <NormalButton onClick={() => selected ? toggleEdit() : false} achived={hour.achived} normal={hour.normal} />
                         </div>
                     </div>
                     <div className="productWrapper py-3 px-0 pt-1 flex overflow-hidden w-max" >
@@ -119,7 +108,10 @@ export default function Hour({ data, selected, onSelect }) {
 
                     </div>
                 </div>
-                <EditHour items={hour.items} hourMinutes={data.minutes} postNormal={handleNormal} />
+                <EditHour
+                    hourMinutes={data.minutes}
+                    hourHook={hour}
+                />
             </div>
         </div>
     )

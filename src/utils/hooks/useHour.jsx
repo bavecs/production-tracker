@@ -21,25 +21,36 @@ export const useHour = (h_id, fallback) => {
 
     const [achived, setAchived] = useState(0)
 
-    const operatorState = useState([operatorTemplate])
+    const [operatorArray, setOperatorArray] = useState([operatorTemplate])
 
     let targetHour = (hourObj) => hourObj.hour === h_id;
 
     useEffect(() => {
         if(typeof h_id !== "number") return
 
-        const hour = hoursCnt.find(targetHour)        
-        setItems(hour ? hour.items : [])
+        const hour = hoursCnt.find(targetHour)
+
+        if(hour) {
+            setItems(hour.items)
+            setNormal(hour.goal)
+            setAchived(hour.achived)
+            setOperatorArray(hour.operators.length ? hour.operators : operatorArray)
+        }
 
     }, [h_id])
-
+ 
     useEffect(()=>{
 
         if (hoursCnt)
             sethoursCnt(hoursCnt.map(hourObj =>
-                targetHour(hourObj) ? {...hourObj, items: items} : hourObj))
+                targetHour(hourObj) ? {...hourObj,
+                    items: items,
+                    goal: normal,
+                    achived: achived,
+                    operators: operatorArray
+                } : hourObj))
 
-    }, [items])
+    }, [items, normal, achived])
 
 
     return {
@@ -53,21 +64,17 @@ export const useHour = (h_id, fallback) => {
             setItems(items.filter(item => item.id !== id))
         },
 
-        hourAchived: 0,
+        achived,
 
-        setHourAchived: n => {
-            sethoursCnt(hoursCnt.map(hourObj => {
-                return h_id === hourObj.hour ? {...hourObj, achived: n} : hourObj
-            }))
-        },
+        setAchived,
 
-        hourNormal: normal,
+        normal,
 
-        setHourNormal: n => setNormal(n),
+        setNormal,
 
-        hourOperatorArray: [],
+        operatorArray,
 
-        setHourArray: n => []
+        setOperatorArray
     }
     
 }

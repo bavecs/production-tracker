@@ -144,3 +144,39 @@ nav .active .nav-title {
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none;
 }
+
+
+.norm_table * {
+    text-align: center;
+}
+
+.norm_table td.val_col {
+    height: 50px;
+    width: 100px;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+
+}
+
+.norm_table .separator {
+    width: calc(1.414 * 100px);
+    transform: rotate(332deg);
+    transform-origin: bottom left;
+    border-top: 1px solid rgb(0 0 0 / 35%);
+    position: absolute;
+    bottom: -2px;
+    left: -1px;
+    box-sizing: border-box;
+}
+
+.norm_table td.val_col b {
+    position: absolute;
+    right: 10px;
+}
+
+.norm_table td.val_col b.sp {
+    top: 7px;
+    left: 10px;
+    right: auto;
+}

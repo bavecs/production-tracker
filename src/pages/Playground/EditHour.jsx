@@ -17,24 +17,18 @@ const settings = {
 }
 
 
-export default function EditHour({ hourMinutes, postNormal, items }) {
+export default function EditHour({hourHook, hourMinutes }) {
 
     const [productsInHour, setProductsInHour] = useState([]);
 
-    const [normal, setNormal] = useState(0);
-
     let [products]  = useProducts()
 
+    const {
+        items,
+        setNormal,
+        operatorArray,
+        setOperatorArray} = hourHook
 
-    const [operatorArray, setOperatorArray] = useState([
-        {
-            id: 0,
-            onDefaultValue: true,
-            selectedProductId: null,
-            customValue: null,
-            color: "rgb(132 204 22)"
-        }
-    ])
 
     useEffect(() => {
 
@@ -59,15 +53,11 @@ export default function EditHour({ hourMinutes, postNormal, items }) {
 
         setProductsInHour(productsInHour);
 
+        updateNormal();
+
 
     }, [items, operatorArray]);
 
-    useEffect(() => {
-
-        updateNormal();
-        postNormal(normal);
-
-    }, [operatorArray, normal, items])
 
     /*
     * Find the client operator in Operator Array and replace
@@ -76,7 +66,6 @@ export default function EditHour({ hourMinutes, postNormal, items }) {
         setOperatorArray(operatorArray.map(operator =>
             (operator.id === targetOperator.id) ? targetOperator : operator
         ))
-
     }
 
     const updateNormal = () => {
@@ -99,7 +88,7 @@ export default function EditHour({ hourMinutes, postNormal, items }) {
 
     }
 
-    const newOperator = () => {
+    const addOperator = () => {
         if (operatorArray.length < settings.maxOperatorQuantity) 
             setOperatorArray([...operatorArray, {
                 id: operatorArray.length,
@@ -120,7 +109,12 @@ export default function EditHour({ hourMinutes, postNormal, items }) {
 
             {
                 operatorArray.map(operator =>
-                    <Operator key={operator.id} operator={operator} updateOperator={updateOperator} removeOperator={removeOperator} products={productsInHour} />)
+                    <Operator
+                        key={operator.id}
+                        operator={operator}
+                        updateOperator={updateOperator}
+                        removeOperator={removeOperator}
+                        products={productsInHour} />)
                 }
 
             <div className="flex p-3 place-content-around gap-3">
@@ -129,7 +123,7 @@ export default function EditHour({ hourMinutes, postNormal, items }) {
                         operatorArray.length < settings.maxOperatorQuantity &&
                         <button
                             type="button"
-                            onClick={newOperator}
+                            onClick={addOperator}
                             className="py-2 flex px-4 mr-2 mb-2 text-xs font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 ">
                             <BsPersonPlusFill className="mr-2 -ml-1 w-4 h-4" />
                             Új operátor
