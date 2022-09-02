@@ -25,8 +25,6 @@ export default function EditHour({hourHook, hourMinutes }) {
 
     const {
         items,
-        setHourAchived,
-        normal,
         setNormal,
         operatorArray,
         setOperatorArray} = hourHook
@@ -68,7 +66,6 @@ export default function EditHour({hourHook, hourMinutes }) {
         setOperatorArray(operatorArray.map(operator =>
             (operator.id === targetOperator.id) ? targetOperator : operator
         ))
-
     }
 
     const updateNormal = () => {
@@ -87,14 +84,11 @@ export default function EditHour({hourHook, hourMinutes }) {
             }
         });
 
-        console.log(normal);
-        console.log(operatorArray[0]);
-
         setNormal(normal);
 
     }
 
-    const newOperator = () => {
+    const addOperator = () => {
         if (operatorArray.length < settings.maxOperatorQuantity) 
             setOperatorArray([...operatorArray, {
                 id: operatorArray.length,
@@ -115,7 +109,12 @@ export default function EditHour({hourHook, hourMinutes }) {
 
             {
                 operatorArray.map(operator =>
-                    <Operator key={operator.id} operator={operator} updateOperator={updateOperator} removeOperator={removeOperator} products={productsInHour} />)
+                    <Operator
+                        key={operator.id}
+                        operator={operator}
+                        updateOperator={updateOperator}
+                        removeOperator={removeOperator}
+                        products={productsInHour} />)
                 }
 
             <div className="flex p-3 place-content-around gap-3">
@@ -124,7 +123,7 @@ export default function EditHour({hourHook, hourMinutes }) {
                         operatorArray.length < settings.maxOperatorQuantity &&
                         <button
                             type="button"
-                            onClick={newOperator}
+                            onClick={addOperator}
                             className="py-2 flex px-4 mr-2 mb-2 text-xs font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 ">
                             <BsPersonPlusFill className="mr-2 -ml-1 w-4 h-4" />
                             Új operátor

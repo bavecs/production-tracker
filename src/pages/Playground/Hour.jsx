@@ -17,8 +17,6 @@ export default function Hour({ data, selected, onSelect }) {
 
     const [selectedItem,  setSelectedItem] = useState(null)
 
-    const [operators, setOperators] = useState(1);
-
     const hour = useHour(data.hour)
 
     const [numpadIsActive, setNumpadIsActive] = useNumpad().numpadIsActiveState
@@ -74,7 +72,7 @@ export default function Hour({ data, selected, onSelect }) {
                         <div className="info flex" id="toggleEditParent">
                             <span className="flex text-xs m-[5px] mr-4 text-slate-600 dark:text-slate-400">
                                 <FaUserAlt className="mr-1 mt-[3px] text-[10px]" />
-                                {operators}
+                                {hour.operatorArray.length}
                             </span>
                             <NormalButton onClick={() => selected ? toggleEdit() : false} achived={hour.achived} normal={hour.normal} />
                         </div>

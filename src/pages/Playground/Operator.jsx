@@ -5,19 +5,25 @@ import { BsFillPersonFill, BsXLg } from "react-icons/bs";
 
 export default function Operator({operator, updateOperator, removeOperator, products}) {
 
-    const [selected, setSelected] = useState(0)
+    const [selected, setSelected] = useState(null)
     const [customValue, setCustomValue] = useState()
     const [customValueInput, setCustomValueInput] = useState(false)
 
 
     useEffect(()=> {
-        if (!products.length) return
 
+        if (!products.length) return
+        
+        
         if (operator.onDefaultValue)
             setSelected(products[0].id)
+        else
+            setSelected(operator.selectedProductId)
+
     }, [products]);
 
     useEffect(()=>{
+        if(selected != null)
         updateOperator({...operator, selectedProductId: selected})
     }, [selected])
 
@@ -60,7 +66,7 @@ export default function Operator({operator, updateOperator, removeOperator, prod
             <select
                 id="selectableProductOptions"
                 className="bg-gray-50 h-9 p-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-60"
-                value={selected}
+                value={selected ?? 0}
                 onChange={handleSelection}
                 style={{fontStyle:  operator.onDefaultValue ? 'italic' : ''}}
                 >

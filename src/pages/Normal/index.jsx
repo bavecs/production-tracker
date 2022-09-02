@@ -53,7 +53,9 @@ export default function Table() {
                   </th>
                   <td className="py-4 px-2 val_col">
                     { hour.achived ? (<>
-                      {hour.achived} <span className="separator">/</span> {hour.goal}
+                      <b className={`backdrop: ${(hour.achived >= hour.goal) ? 'positive' :  'negative' }`}>
+                        {hour.achived}
+                        </b> <span className="separator">/</span> {hour.goal}
                       </>) : ''
                     }
                     
@@ -61,7 +63,9 @@ export default function Table() {
           
                   <td className="py-4 px-2 val_col border  border-black">
                   { hour.achived ? (<>
-                      {hour.allAchived} <span className="separator">/</span> {hour.allGoal}
+                      <b className={`backdrop: ${(hour.allAchived >= hour.allGoal) ? 'positive' :  'negative' }`}>
+                        {hour.allAchived}
+                        </b> <span className="separator">/</span> {hour.allGoal}
                       </>) : ''
                     }
                   </td>

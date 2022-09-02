@@ -38,7 +38,7 @@ export const useHour = (h_id, fallback) => {
         }
 
     }, [h_id])
-
+ 
     useEffect(()=>{
 
         if (hoursCnt)
@@ -66,15 +66,15 @@ export const useHour = (h_id, fallback) => {
 
         achived,
 
-        setAchived: n => setAchived(n),
+        setAchived,
 
         normal,
 
-        setNormal: n => setNormal(n),
+        setNormal,
 
         operatorArray,
 
-        setOperatorArray: n => {console.log('setoperator array'); setOperatorArray(n)}
+        setOperatorArray
     }
     
 }

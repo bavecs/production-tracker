@@ -12,6 +12,8 @@ export const useHourLocalStorage = (storageKey, fallbackState) => {
   useEffect(() => {
 
     localStorage.setItem(storageKey, JSON.stringify(value));
+
+    console.log('run')
     
   }, [value, storageKey]);
 
