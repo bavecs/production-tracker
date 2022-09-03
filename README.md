@@ -4,7 +4,7 @@ Termelés és teljesítmény követő alkalmazás a FESTO AM operátorok részé
 
 #react #graphQl
 
-
+Demo: https://master.d3hs7s1k95s0pr.amplifyapp.com/
 
 ## A probléma
 
